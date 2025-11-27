@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel de Accesos - Gimnasio</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!--     ENCABEZADO GENERAL    -->
+<!-- ========================= -->
+<header class="main-header">
+    <h1>Sistema de Control de Accesos</h1>
+    <p class="subtitle">Gimnasio – Gestión de Usuarios e Inventario</p>
+</header>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!--       LOGIN                -->
+    <!-- ========================= -->
+    <section id="loginCard" class="card">
+        <h2>Iniciar Sesión</h2>
+        <p class="section-desc">Accede con tus credenciales para continuar</p>
+
+        <label>Correo electrónico:</label>
+        <input id="loginEmail" type="text" placeholder="usuario@ejemplo.com">
+
+        <label>Contraseña:</label>
+        <input id="loginPass" type="password" placeholder="•••••••">
+
+        <button onclick="login()">Entrar</button>
+        <p id="loginMsg"></p>
+    </section>
+
+    <!-- ========================= -->
+    <!--      PANEL ADMIN          -->
+    <!-- ========================= -->
+    <section id="adminCard" class="card hidden">
+        <h2>Panel de Administrador</h2>
+        <p class="section-desc">Registrar usuarios nuevos</p>
+
+        <label>Nombre:</label>
+        <input id="newName" placeholder="Nombre completo">
+
+        <label>Correo:</label>
+        <input id="newEmail" placeholder="correo@ejemplo.com">
+
+        <label>Contraseña:</label>
+        <input id="newPass" type="password" placeholder="Mínimo 4 caracteres">
+
+        <label>Rol:</label>
+        <select id="newRole">
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+        </select>
+
+        <button onclick="registerUser()">Registrar Usuario</button>
+        <p id="regMsg"></p>
+    </section>
+
+    <!-- ========================= -->
+    <!--       INVENTARIO          -->
+    <!-- ========================= -->
+    <section id="inventoryCard" class="card hidden">
+        <h2>Inventario del Gimnasio</h2>
+        <p class="section-desc">Consulta el inventario con filtros</p>
+
+        <div class="filter-group">
+            <input id="filterName" placeholder="🔎 Buscar por nombre" oninput="renderInventory()">
+
+            <select id="filterCat" onchange="renderInventory()">
+                <option value="">Todas las categorías</option>
+                <option value="Maquinaria">Maquinaria</option>
+                <option value="Pesas">Pesas</option>
+                <option value="Accesorios">Accesorios</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Artículo</th>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryTable"></tbody>
+        </table>
+    </section>
+
+</div>
+
+<!-- ========================= -->
+<!--        FOOTER             -->
+<!-- ========================= -->
+<footer class="footer">
+    <p>© 2025 Gimnasio - Sistema de Accesos | Desarrollado para prácticas académicas</p>
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
