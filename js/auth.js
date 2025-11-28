@@ -24,6 +24,12 @@ function login() {
     msg.style.color = "#CFFF04";
     msg.innerText = "Acceso correcto, redirigiendo...";
 
+    // Redirigir a la Tienda
+    setTimeout(() => {
+        window.location.href = "Tienda.html";
+    }, 800);
+}
+
     // Redirigir según el rol
     setTimeout(() => {
         if (userFound.role === "admin") {
