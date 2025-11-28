@@ -11,11 +11,7 @@ function login() {
 
     const userFound = usuarios.find(u => u.email === email && u.pass === pass);
 
-    if (userFound.role === "admin"){
-        window.location.href = "tienda.html";
-    } else {
-        window.location.href = "tienda.html";
-    }
+    if (userFound){
         msg.style.color = "red";
         msg.innerText = "Credenciales incorrectas";
         return;
@@ -37,9 +33,9 @@ function login() {
     // Redirigir según el rol
     setTimeout(() => {
         if (userFound.role === "admin") {
-            window.location.href = "dashboard_admin.html";
+            window.location.href = "tienda.html";
         } else {
-            window.location.href = "dashboard_user.html";
+            window.location.href = "tienda.html";
         }
     }, 800);
 }
