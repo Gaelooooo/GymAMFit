@@ -1,106 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Panel de Accesos - Gimnasio</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymAMFIT - Acceso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<!-- ========================= -->
-<!--     ENCABEZADO GENERAL    -->
-<!-- ========================= -->
-<header class="main-header">
-    <h1>Sistema de Control de Accesos</h1>
-    <p class="subtitle">Gimnasio – Gestión de Usuarios e Inventario</p>
-</header>
-
-<div class="container">
-
-    <!-- ========================= -->
-    <!--       LOGIN                -->
-    <!-- ========================= -->
-    <section id="loginCard" class="card">
-        <h2>Iniciar Sesión</h2>
-        <p class="section-desc">Accede con tus credenciales para continuar</p>
-
-        <label>Correo electrónico:</label>
-        <input id="loginEmail" type="text" placeholder="usuario@ejemplo.com">
-
-        <label>Contraseña:</label>
-        <input id="loginPass" type="password" placeholder="•••••••">
-
-        <button onclick="login()">Entrar</button>
-        <p id="loginMsg"></p>
-    </section>
-
-    <!-- ========================= -->
-    <!--      PANEL ADMIN          -->
-    <!-- ========================= -->
-    <section id="adminCard" class="card hidden">
-        <h2>Panel de Administrador</h2>
-        <p class="section-desc">Registrar usuarios nuevos</p>
-
-        <label>Nombre:</label>
-        <input id="newName" placeholder="Nombre completo">
-
-        <label>Correo:</label>
-        <input id="newEmail" placeholder="correo@ejemplo.com">
-
-        <label>Contraseña:</label>
-        <input id="newPass" type="password" placeholder="Mínimo 4 caracteres">
-
-        <label>Rol:</label>
-        <select id="newRole">
-            <option value="usuario">Usuario</option>
-            <option value="admin">Administrador</option>
-        </select>
-
-        <button onclick="registerUser()">Registrar Usuario</button>
-        <p id="regMsg"></p>
-    </section>
-
-    <!-- ========================= -->
-    <!--       INVENTARIO          -->
-    <!-- ========================= -->
-    <section id="inventoryCard" class="card hidden">
-        <h2>Inventario del Gimnasio</h2>
-        <p class="section-desc">Consulta el inventario con filtros</p>
-
-        <div class="filter-group">
-            <input id="filterName" placeholder="🔎 Buscar por nombre" oninput="renderInventory()">
-
-            <select id="filterCat" onchange="renderInventory()">
-                <option value="">Todas las categorías</option>
-                <option value="Maquinaria">Maquinaria</option>
-                <option value="Pesas">Pesas</option>
-                <option value="Accesorios">Accesorios</option>
-            </select>
+    <header class="main-header">
+        <div class="logo-container">
+            <h1>Gym<span class="highlight">AMFIT</span></h1>
+            <span class="badge">PUNTO DE VENTA</span>
         </div>
+        <p class="subtitle">Sistema de Control de Accesos e Inventario</p>
+    </header>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Artículo</th>
-                    <th>Categoría</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody id="inventoryTable"></tbody>
-        </table>
-    </section>
+    <div class="container">
 
-</div>
+        <section id="loginCard" class="card">
+            <div class="card-header">
+                <h2>Iniciar Sesión</h2>
+            </div>
+            <p class="section-desc">Ingresa tus credenciales de Staff</p>
 
-<!-- ========================= -->
-<!--        FOOTER             -->
-<!-- ========================= -->
-<footer class="footer">
-    <p>© 2025 Gimnasio - Sistema de Accesos | Desarrollado para prácticas académicas</p>
-</footer>
+            <label>Correo electrónico:</label>
+            <input id="loginEmail" type="text" placeholder="usuario@ejemplo.com">
 
-<script src="app.js"></script>
+            <label>Contraseña:</label>
+            <input id="loginPass" type="password" placeholder="•••••••">
+
+            <button onclick="login()" class="btn-action">ENTRAR AL SISTEMA</button>
+            <p id="loginMsg"></p>
+        </section>
+
+        <section id="adminCard" class="card hidden">
+            <div class="card-header">
+                <h2>Panel de Administrador</h2>
+            </div>
+            <p class="section-desc">Alta de nuevos miembros</p>
+
+            <label>Nombre:</label>
+            <input id="newName" placeholder="Nombre completo del socio">
+
+            <label>Correo:</label>
+            <input id="newEmail" placeholder="socio@email.com">
+
+            <label>Contraseña:</label>
+            <input id="newPass" type="password" placeholder="Asignar contraseña">
+
+            <label>Rol:</label>
+            <div class="select-wrapper">
+                <select id="newRole">
+                    <option value="usuario">Socio / Usuario</option>
+                    <option value="admin">Staff / Admin</option>
+                </select>
+            </div>
+
+            <button onclick="registerUser()" class="btn-action">REGISTRAR USUARIO</button>
+            <p id="regMsg"></p>
+        </section>
+
+        <section id="inventoryCard" class="card hidden">
+            <div class="card-header">
+                <h2>Inventario GymAMFIT</h2>
+            </div>
+            
+            <div class="filter-group">
+                <input id="filterName" placeholder="🔎 Buscar producto..." oninput="renderInventory()">
+                
+                <div class="select-wrapper">
+                    <select id="filterCat" onchange="renderInventory()">
+                        <option value="">Todas las categorías</option>
+                        <option value="Maquinaria">Maquinaria</option>
+                        <option value="Pesas">Pesas</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Suplementos">Suplementos</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Artículo</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Gimnasio - Sistema de Accesos | Desarrollado para prácticas académicas</p>
+    </footer>
+
+    <script src="app.js"></script>
 
 </body>
 </html>
