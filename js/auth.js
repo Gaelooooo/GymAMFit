@@ -11,7 +11,11 @@ function login() {
 
     const userFound = usuarios.find(u => u.email === email && u.pass === pass);
 
-    if (!userFound) {
+    if (userFound.role === "admin"){
+        window.location.href = "tienda.html";
+    } else {
+        window.location.href = "tienda.html";
+    }
         msg.style.color = "red";
         msg.innerText = "Credenciales incorrectas";
         return;
