@@ -114,6 +114,30 @@
 
     <script src="app.js"></script>
 
+    <script>
+function login(event) {
+    event.preventDefault(); // evita que la página se recargue sin querer
+
+    const user = document.getElementById("usuario").value.trim();
+    const pass = document.getElementById("contra").value.trim();
+
+    // Credenciales del administrador
+    if (user === "admin" && pass === "admin123") {
+        window.location.href = "dashboard_admin.html";
+        return;
+    }
+
+    // Credenciales del usuario
+    if (user === "usuario" && pass === "user123") {
+        window.location.href = "dashboard_user.html";
+        return;
+    }
+
+    // Si no coincide nada:
+    alert("Usuario o contraseña incorrectos");
+}
+</script>
+
 
 </body>
 </html>
