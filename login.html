@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymAMFIT - Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="logo-container">
+            <h1>Gym<span class="highlight">AMFIT</span></h1>
+            <span class="badge">LOGIN</span>
+        </div>
+        <p class="subtitle">Acceso al Sistema</p>
+    </header>
+
+    <div class="container">
+        <section class="card">
+            <div class="card-header">
+                <h2>Iniciar Sesión</h2>
+            </div>
+
+            <p class="section-desc">Introduce tus credenciales</p>
+
+            <label>Correo electrónico:</label>
+            <input id="loginEmail" type="text" placeholder="usuario@ejemplo.com">
+
+            <label>Contraseña:</label>
+            <input id="loginPass" type="password" placeholder="••••••••">
+
+            <button onclick="login()" class="btn-action">ENTRAR</button>
+            <p id="loginMsg"></p>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 GymAMFIT | Sistema de Acceso</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
