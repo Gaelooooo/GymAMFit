@@ -59,3 +59,5 @@ function editar(id) {
 
     eliminar(id);
 }
+
+// Se eliminó la llave extra que cerraba un bloque innecesario
