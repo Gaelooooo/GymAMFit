@@ -1,58 +1,86 @@
-// Protección viene desde auth.js
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - GymAMFIT</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
 
-let inventario = JSON.parse(localStorage.getItem("inventario")) || [];
+<body onload="protegerPagina('admin')">
 
-// Registrar usuarios desde el panel admin
-function registerUser() {
-    const name = document.getElementById("newNameAdmin").value.trim();
-    const email = document.getElementById("newEmailAdmin").value.trim();
-    const pass = document.getElementById("newPassAdmin").value.trim();
-    const role = document.getElementById("newRoleAdmin").value;
+    <header class="main-header">
+        <h1>Panel de Administración</h1>
+        <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+    </header>
 
-    if (!name || !email || !pass) {
-        document.getElementById("adminMsg").innerText = "Completa todos los campos.";
-        return;
-    }
+    <div class="container">
 
-    let users = JSON.parse(localStorage.getItem("usuarios")) || [];
+        <section class="card">
+            <div class="card-header">
+                <h2>Registrar Nuevo Usuario</h2>
+            </div>
 
-    users.push({ name, email, pass, role });
-    localStorage.setItem("usuarios", JSON.stringify(users));
+            <label>Nombre:</label>
+            <input id="newNameAdmin" type="text">
 
-    document.getElementById("adminMsg").innerText = "Usuario registrado correctamente";
-}
+            <label>Correo:</label>
+            <input id="newEmailAdmin" type="email">
 
-// Agregar inventario
-function addInventory() {
-    const name = document.getElementById("invName").value.trim();
-    const cat = document.getElementById("invCat").value;
-    const stock = document.getElementById("invStock").value;
+            <label>Contraseña:</label>
+            <input id="newPassAdmin" type="password">
 
-    if (!name || !stock) {
-        document.getElementById("invMsg").innerText = "Completa los campos.";
-        return;
-    }
+            <label>Rol:</label>
+            <select id="newRoleAdmin">
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+            </select>
 
-    inventario.push({ name, cat, stock });
-    localStorage.setItem("inventario", JSON.stringify(inventario));
+            <button onclick="registerUser()" class="btn-action">Registrar Usuario</button>
+            <p id="adminMsg"></p>
+        </section>
 
-    document.getElementById("invMsg").innerText = "Producto agregado.";
-    renderInventoryAdmin();
-}
+        <section class="card">
+            <div class="card-header">
+                <h2>Gestión de Inventario</h2>
+            </div>
 
-function renderInventoryAdmin() {
-    const tbody = document.getElementById("inventoryTableAdmin");
-    tbody.innerHTML = "";
+            <label>Producto:</label>
+            <input id="invName" type="text">
 
-    inventario.forEach(item => {
-        tbody.innerHTML += `
-            <tr>
-                <td>${item.name}</td>
-                <td>${item.cat}</td>
-                <td>${item.stock}</td>
-            </tr>
-        `;
-    });
-}
+            <label>Categoría:</label>
+            <select id="invCat">
+                <option value="Ropa">Ropa</option>
+                <option value="Suplementos">Suplementos</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Preentrenos">Preentrenos</option>
+                <option value="Planes de Comida">Planes de comida</option>
+                <option value="Planes de Rutinas">Planes de rutinas</option>
+            </select>
 
-renderInventoryAdmin();
+            <label>Stock:</label>
+            <input id="invStock" type="number">
+
+            <button onclick="addInventory()" class="btn-action">Agregar al Inventario</button>
+
+            <p id="invMsg"></p>
+
+            <h3>Inventario Actual</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableAdmin"></tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="dashboard_admin.js"></script>
+</body>
+</html>
