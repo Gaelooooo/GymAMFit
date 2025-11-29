@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GymAMFIT - Acceso</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -40,18 +38,13 @@
 
             <button id="login-btn" onclick="login(event)" class="btn-action">ENTRAR AL SISTEMA</button>
             <p id="loginMsg"></p>
-        </section>
 
+        </section>
+        
         <section id="adminCard" class="card hidden">
-            <div class="card-header">
-                <h2>Panel de Administrador</h2>
-            </div>
             </section>
 
         <section id="inventoryCard" class="card hidden">
-            <div class="card-header">
-                <h2>Inventario GymAMFIT</h2>
-            </div>
             </section>
 
     </div>
@@ -60,30 +53,33 @@
         <p>© 2025 Gimnasio - Sistema de Accesos | Desarrollado para prácticas académicas</p>
     </footer>
 
+    <script src="app.js"></script>
+
     <script>
         function login(event) {
-            // 1. Prevenir que la página se recargue sola
-            event.preventDefault(); 
+            event.preventDefault(); // Evita el envío del formulario por defecto
 
-            // 2. Obtener los valores de los inputs correctos (loginEmail y loginPass)
+            // 1. Obtener los valores de los inputs correctos (loginEmail y loginPass)
             const user = document.getElementById("loginEmail").value.trim();
             const pass = document.getElementById("loginPass").value.trim();
 
-            // 3. Verificar credenciales
-            // Puedes agregar más usuarios aquí si es necesario
-            if ((user === "admin" && pass === "admin123") || 
-                (user === "usuario" && pass === "user123")) {
-                
-                // 4. Redirigir a la tienda como pediste
-                window.location.href = "tienda.html";
-                
-            } else {
-                // Mensaje si falla
-                alert("Usuario o contraseña incorrectos.\nPrueba con: admin / admin123");
+            // 2. Lógica de acceso por rol
+            if (user === "admin" && pass === "admin123") {
+                // Redirigir al panel de administrador (si existe)
+                window.location.href = "dashboard_admin.html"; 
+                return;
             }
+
+            if (user === "usuario" && pass === "user123") {
+                // Redirigir a la tienda (como solicitaste)
+                window.location.href = "tienda.html"; 
+                return;
+            }
+
+            // 3. Si no coincide ninguna credencial
+            alert("Usuario o contraseña incorrectos.\nPrueba con: admin / admin123 o usuario / user123");
         }
     </script>
 
 </body>
 </html>
-           
