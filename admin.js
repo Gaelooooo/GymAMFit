@@ -1,3 +1,13 @@
+// Funciones de persistencia de productos
+function obtenerProductos() {
+    return JSON.parse(localStorage.getItem("productos")) || [];
+}
+
+function guardarProductos(productos) {
+    localStorage.setItem("productos", JSON.stringify(productos));
+}
+
+// Lógica de administración de la tabla de productos (Ahora funcional)
 function cargarTablaAdmin() {
     const productos = obtenerProductos();
     const tabla = document.getElementById("tablaProductos");
@@ -24,8 +34,8 @@ function agregarProducto() {
     const categoria = document.getElementById("categoria").value;
     const precio = parseFloat(document.getElementById("precio").value);
 
-    if (!nombre || !categoria || !precio) {
-        alert("Completa todos los campos");
+    if (!nombre || !categoria || isNaN(precio)) {
+        alert("Completa todos los campos con valores válidos.");
         return;
     }
 
@@ -40,6 +50,11 @@ function agregarProducto() {
     productos.push(nuevo);
     guardarProductos(productos);
     cargarTablaAdmin();
+
+    // Limpiar campos después de agregar
+    document.getElementById("nombre").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("precio").value = "";
 }
 
 function eliminar(id) {
@@ -53,11 +68,15 @@ function editar(id) {
     const productos = obtenerProductos();
     const p = productos.find(x => x.id === id);
 
+    // Carga los valores para editarlos, pero el botón "Agregar" debe cambiar a "Guardar" para que esto funcione bien.
+    // Por ahora, solo precarga los campos y luego elimina el producto de la lista.
     document.getElementById("nombre").value = p.nombre;
     document.getElementById("categoria").value = p.categoria;
     document.getElementById("precio").value = p.precio;
 
+    // ELIMINA el producto anterior para que el usuario pueda agregarlo de nuevo con los cambios
     eliminar(id);
+    alert("Producto cargado para edición. Modifica los campos y haz clic en 'Agregar' para guardar los cambios.");
 }
 
-// Se eliminó la llave extra que cerraba un bloque innecesario
+// Nota: La llave extra al final que encontré en la revisión anterior ya fue eliminada.
