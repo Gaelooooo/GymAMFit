@@ -38,8 +38,8 @@
 
 
 
-            <button id="login-btn"
-            onclick <a href="tienda.html" class="btn-action">ENTRAR AL SISTEMA</button>
+            <button id="login-btn" onclick="login(event)" class="btn-action">ENTRAR AL SISTEMA</button>
+
             <p id="loginMsg"></p>
 
 
@@ -114,27 +114,32 @@
 
     <script src="app.js"></script>
 
-    <script>
+   <script>
 function login(event) {
-    event.preventDefault(); // evita que la página se recargue sin querer
+    event.preventDefault(); // Evita que la página se recargue
 
-    const user = document.getElementById("usuario").value.trim();
-    const pass = document.getElementById("contra").value.trim();
+    // 1. Obtenemos los valores de los inputs correctos
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPass").value.trim();
 
-    // Credenciales del administrador
-    if (user === "admin" && pass === "admin123") {
-        window.location.href = "dashboard_admin.html";
-        return;
+    // 2. Validación simple (puedes ajustar las credenciales si quieres)
+    // Opción A: Si quieres que CUALQUIER cosa que escriban entre:
+    if (email !== "" && pass !== "") {
+        window.location.href = "tienda.html";
+    } 
+    // Opción B: Si quieres respetar las credenciales específicas:
+    /*
+    else if (email === "admin" && pass === "admin123") {
+        window.location.href = "tienda.html";
     }
-
-    // Credenciales del usuario
-    if (user === "usuario" && pass === "user123") {
-        window.location.href = "dashboard_user.html";
-        return;
+    else if (email === "usuario" && pass === "user123") {
+        window.location.href = "tienda.html";
     }
-
-    // Si no coincide nada:
-    alert("Usuario o contraseña incorrectos");
+    */
+    else {
+        alert("Por favor ingresa credenciales válidas (ej. admin/admin123)");
+        // Si usas la Opción A, elimina este else o ajusta la lógica
+    }
 }
 </script>
 
