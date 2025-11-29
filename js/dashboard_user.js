@@ -1,26 +1,70 @@
-let inventario = JSON.parse(localStorage.getItem("inventario")) || [];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Usuario - GymAMFIT</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
 
-function renderInventoryUser() {
-    const filter = document.getElementById("filterUser").value.toLowerCase();
-    const cat = document.getElementById("filterCatUser").value;
+<body onload="protegerPagina('user')">
 
-    const tbody = document.getElementById("inventoryTableUser");
-    tbody.innerHTML = "";
+    <header class="main-header">
+        <h1>Bienvenido a tu Panel</h1>
+        <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+    </header>
 
-    inventario
-        .filter(item =>
-            item.name.toLowerCase().includes(filter) &&
-            (cat === "" || item.cat === cat)
-        )
-        .forEach(item => {
-            tbody.innerHTML += `
-                <tr>
-                    <td>${item.name}</td>
-                    <td>${item.cat}</td>
-                    <td>${item.stock}</td>
-                </tr>
-            `;
-        });
-}
+    <div class="container">
 
-renderInventoryUser();
+        <section class="card">
+            <div class="card-header">
+                <h2>Catálogo del Gym</h2>
+            </div>
+
+            <p>Explora los artículos disponibles del gimnasio.</p>
+
+            <label>Buscar:</label>
+            <input id="filterUser" type="text" oninput="renderInventoryUser()">
+
+            <label>Categoría:</label>
+            <select id="filterCatUser" onchange="renderInventoryUser()">
+                <option value="">Todas</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Suplementos">Suplementos</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Preentrenos">Preentrenos</option>
+                <option value="Planes de Comida">Planes de Comida</option>
+                <option value="Planes de Rutinas">Planes de Rutinas</option>
+            </select>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableUser"></tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <h2>Planes Disponibles</h2>
+            </div>
+
+            <ul>
+                <li>✓ Rutinas personalizadas</li>
+                <li>✓ Planes de comida especializados</li>
+                <li>✓ Seguimiento mensual</li>
+                <li>✓ Asesoría con entrenador</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="dashboard_user.js"></script>
+</body>
+</html>
