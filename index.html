@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GymAMFIT - Acceso</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -32,79 +34,25 @@
             <input id="loginEmail" type="text" placeholder="usuario@ejemplo.com">
 
             <label>Contraseña:</label>
-<div class="input-wrapper">
-  <input id="loginPass" type="password" placeholder="•••••••">
-</div>
-
-
+            <div class="input-wrapper">
+                <input id="loginPass" type="password" placeholder="•••••••">
+            </div>
 
             <button id="login-btn" onclick="login(event)" class="btn-action">ENTRAR AL SISTEMA</button>
-
             <p id="loginMsg"></p>
-
-
-    <script src="js/auth.js"></script>
         </section>
 
         <section id="adminCard" class="card hidden">
             <div class="card-header">
                 <h2>Panel de Administrador</h2>
             </div>
-            <p class="section-desc">Alta de nuevos miembros</p>
-
-            <label>Nombre:</label>
-            <input id="newName" placeholder="Nombre completo del socio">
-
-            <label>Correo:</label>
-            <input id="newEmail" placeholder="socio@email.com">
-
-            <label>Contraseña:</label>
-            <input id="newPass" type="password" placeholder="Asignar contraseña">
-
-            <label>Rol:</label>
-            <div class="select-wrapper">
-                <select id="newRole">
-                    <option value="usuario">Socio / Usuario</option>
-                    <option value="admin">Staff / Admin</option>
-                </select>
-            </div>
-
-            <button onclick="registerUser()" class="btn-action">REGISTRAR USUARIO</button>
-            <p id="regMsg"></p>
-        </section>
+            </section>
 
         <section id="inventoryCard" class="card hidden">
             <div class="card-header">
                 <h2>Inventario GymAMFIT</h2>
             </div>
-            
-            <div class="filter-group">
-                <input id="filterName" placeholder="🔎 Buscar producto..." oninput="renderInventory()">
-                
-                <div class="select-wrapper">
-                    <select id="filterCat" onchange="renderInventory()">
-                        <option value="">Todas las categorías</option>
-                        <option value="Maquinaria">Maquinaria</option>
-                        <option value="Pesas">Pesas</option>
-                        <option value="Accesorios">Accesorios</option>
-                        <option value="Suplementos">Suplementos</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Artículo</th>
-                            <th>Categoría</th>
-                            <th>Stock</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventoryTable"></tbody>
-                </table>
-            </div>
-        </section>
+            </section>
 
     </div>
 
@@ -112,37 +60,30 @@
         <p>© 2025 Gimnasio - Sistema de Accesos | Desarrollado para prácticas académicas</p>
     </footer>
 
-    <script src="app.js"></script>
+    <script>
+        function login(event) {
+            // 1. Prevenir que la página se recargue sola
+            event.preventDefault(); 
 
-   <script>
-function login(event) {
-    event.preventDefault(); // Evita que la página se recargue
+            // 2. Obtener los valores de los inputs correctos (loginEmail y loginPass)
+            const user = document.getElementById("loginEmail").value.trim();
+            const pass = document.getElementById("loginPass").value.trim();
 
-    // 1. Obtenemos los valores de los inputs correctos
-    const email = document.getElementById("loginEmail").value.trim();
-    const pass = document.getElementById("loginPass").value.trim();
-
-    // 2. Validación simple (puedes ajustar las credenciales si quieres)
-    // Opción A: Si quieres que CUALQUIER cosa que escriban entre:
-    if (email !== "" && pass !== "") {
-        window.location.href = "tienda.html";
-    } 
-    // Opción B: Si quieres respetar las credenciales específicas:
-    /*
-    else if (email === "admin" && pass === "admin123") {
-        window.location.href = "tienda.html";
-    }
-    else if (email === "usuario" && pass === "user123") {
-        window.location.href = "tienda.html";
-    }
-    */
-    else {
-        alert("Por favor ingresa credenciales válidas (ej. admin/admin123)");
-        // Si usas la Opción A, elimina este else o ajusta la lógica
-    }
-}
-</script>
-
+            // 3. Verificar credenciales
+            // Puedes agregar más usuarios aquí si es necesario
+            if ((user === "admin" && pass === "admin123") || 
+                (user === "usuario" && pass === "user123")) {
+                
+                // 4. Redirigir a la tienda como pediste
+                window.location.href = "tienda.html";
+                
+            } else {
+                // Mensaje si falla
+                alert("Usuario o contraseña incorrectos.\nPrueba con: admin / admin123");
+            }
+        }
+    </script>
 
 </body>
 </html>
+           
